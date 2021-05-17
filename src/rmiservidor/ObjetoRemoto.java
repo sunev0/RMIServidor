@@ -40,8 +40,8 @@ public class ObjetoRemoto extends UnicastRemoteObject implements Interfaz, Seria
         if (conectado == false) {
             usuarios.add(nomusuario);
             Mensajes mensajes = new Mensajes();
-            mensajes.setNomUsuario(nomusuario);
-            mensajes.setMensaje(" entró al chat ");
+            mensajes.setUsuarios(nomusuario);
+            mensajes.setMens(" entró al chat ");
             mensajes.setTipo("entró");
             mensajes.setFecha(new Date());
             mensaje.add(mensajes);
@@ -56,8 +56,8 @@ public class ObjetoRemoto extends UnicastRemoteObject implements Interfaz, Seria
     public void logout(String nomusuario) throws RemoteException {
         usuarios.remove(nomusuario);
         Mensajes mensajes = new Mensajes();
-        mensajes.setNomUsuario(nomusuario);
-        mensajes.setMensaje(" dejó el chat ");
+        mensajes.setUsuarios(nomusuario);
+        mensajes.setMens(" dejó el chat ");
         mensajes.setTipo("dejó");
         mensajes.setFecha(new Date());
         mensaje.add(mensajes);
@@ -71,7 +71,7 @@ public class ObjetoRemoto extends UnicastRemoteObject implements Interfaz, Seria
    // @Override
     public List<Mensajes> ObtenerMensajes() throws RemoteException {
         for (Mensajes m : mensaje) {
-            System.out.println(m.getNomUsuario() + " " + m.getMensaje());
+            System.out.println(m.getUsuarios() + " " + m.getMens());
         }
         return mensaje;
     }

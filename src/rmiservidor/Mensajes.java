@@ -14,17 +14,17 @@ import java.util.Date;
  */
 public class Mensajes implements Serializable { //Para que un programa java pueda convertir un objeto en un montón de bytes y pueda luego recuperarlo debe ser serializable
     
-    private String NomUsuario;
-    private String Mensj;
+    private String nomUsu;
+    private String mens;
     private String tipo;
-    private Date Fecha;
+    private Date fecha;
 
   public Date getFecha() {
-        return Fecha;
+        return fecha;
     }
 
-    public void setFecha(Date Fecha) {
-        this.Fecha = Fecha;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
     
     public String getTipo() {
@@ -35,20 +35,20 @@ public class Mensajes implements Serializable { //Para que un programa java pued
         this.tipo = tipo;
     }
 
-    public String getNomUsuario() {
-        return NomUsuario;
+    public String getUsuarios() {
+        return nomUsu;
     }
 
-    public void setNomUsuario(String nomusuario) {
-        this.NomUsuario = nomusuario;
+    public void setUsuarios(String nomusuario) {
+        this.nomUsu = nomusuario;
     }
 
-    public String getMensaje() {
-        return Mensj;
+    public String getMens() {
+        return mens;
     }
 
-    public void setMensaje(String mensj) {
-        this.Mensj = mensj;
+    public void setMens(String mensj) {
+        this.mens = mensj;
     }
     
 }
