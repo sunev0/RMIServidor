@@ -19,18 +19,18 @@ import java.util.List;
 public class ObjetoRemoto extends UnicastRemoteObject implements Interfaz, Serializable {
 
     List<String> usuarios = new ArrayList<>();
-    List<Mensajes> mensaje = new ArrayList<>();
+    List<Mensajes> mensajes = new ArrayList<>();
 
     public ObjetoRemoto() throws RemoteException {
         super(); //Activa el código en UnicastRemoteObject que realiza la vinculación RMI y la inicialización remota del objeto
 
     }
 
-    //@Override
-    public boolean login(String nomusuario) throws RemoteException {
+    @Override
+    public boolean iniciarses(String nomUsu) throws RemoteException {
         boolean conectado = false;
         for (String usuario : usuarios) {
-            if (usuarios.equals(usuario)) {
+            if (nomUsu.equals(usuario)) {
                 conectado = true;
                 break;
             } else {
@@ -38,13 +38,13 @@ public class ObjetoRemoto extends UnicastRemoteObject implements Interfaz, Seria
             }
         }
         if (conectado == false) {
-            usuarios.add(nomusuario);
-            Mensajes mensajes = new Mensajes();
-            mensajes.setUsuarios(nomusuario);
-            mensajes.setMens(" entró al chat ");
-            mensajes.setTipo("entró");
-            mensajes.setFecha(new Date());
-            mensaje.add(mensajes);
+            usuarios.add(nomUsu);
+            Mensajes mensaje = new Mensajes();
+            mensaje.setNomUsu(nomUsu);
+            mensaje.setMensaje(" entró al chat ");
+            mensaje.setTipo("entró");
+            mensaje.setFecha(new Date());
+            this.mensajes.add(mensaje);
 
             return true;
         } else {
@@ -52,32 +52,32 @@ public class ObjetoRemoto extends UnicastRemoteObject implements Interfaz, Seria
         }
     }
 
-   // @Override
-    public void logout(String nomusuario) throws RemoteException {
-        usuarios.remove(nomusuario);
-        Mensajes mensajes = new Mensajes();
-        mensajes.setUsuarios(nomusuario);
-        mensajes.setMens(" dejó el chat ");
-        mensajes.setTipo("dejó");
-        mensajes.setFecha(new Date());
-        mensaje.add(mensajes);
+    @Override
+    public void cerrarses(String nomUsu) throws RemoteException {
+        usuarios.remove(nomUsu);
+        Mensajes mensaje = new Mensajes();
+        mensaje.setNomUsu(nomUsu);
+        mensaje.setMensaje(" dejó el chat ");
+        mensaje.setTipo("dejó");
+        mensaje.setFecha(new Date());
+        this.mensajes.add(mensaje);
     }
 
-    //@Override
-    public void MandarMensaje(Mensajes mensajes) throws RemoteException {
-        mensaje.add(mensajes);
+    @Override
+    public void enviarmens(Mensajes mensaje) throws RemoteException {
+        this.mensajes.add(mensaje);
     }
 
-   // @Override
-    public List<Mensajes> ObtenerMensajes() throws RemoteException {
-        for (Mensajes m : mensaje) {
-            System.out.println(m.getUsuarios() + " " + m.getMens());
+   @Override
+    public List<Mensajes> getTodosMens() throws RemoteException {
+        for (Mensajes m : mensajes) {
+            System.out.println(m.getNomUsu() + " " + m.getMensaje());
         }
-        return mensaje;
+        return mensajes;
     }
 
-   // @Override
-    public List<String> ObtenerUsuarios() throws RemoteException {
+    @Override
+    public List<String> getTodosUsu() throws RemoteException {
         for (String u : usuarios) {
             System.out.println(u);
         }
